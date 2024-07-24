@@ -103,6 +103,7 @@ INSTALLED_APPS = [
 LOCAL_APPS = [
     'apps.user',
     'apps.authentication',
+    'apps.snippets_management'
 ]
 
 THIRD_PARTY_APPS = [
