@@ -45,7 +45,7 @@ urlpatterns = [
 
     re_path(r'^api/',include([
         path('user/', include('apps.user.urls')),
-
+        path('auth/', include('apps.authentication.urls')),
 
         re_path(r'^docs/', include([
 

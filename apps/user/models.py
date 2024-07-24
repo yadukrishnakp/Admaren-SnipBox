@@ -39,7 +39,7 @@ class Users(AbstractBaseUser):
     #     self.original_password = self.password
         
     email                         = models.EmailField(_('email'), unique = True, max_length = 255, blank = True, null = True)
-    full_name                          = models.CharField(_('name'), max_length=255, blank = True, null = True)
+    full_name                     = models.CharField(_('name'), max_length=255, blank = True, null = True)
     username                      = models.CharField(_('username'), max_length = 300, unique = True, blank = True, null = True)
     password                      = models.CharField(_('password'), max_length=255, blank = True, null = True)
     slug                          = models.SlugField(_('slug'),  max_length=255, unique=True, editable=False, blank = True, null = True)

@@ -102,6 +102,7 @@ INSTALLED_APPS = [
 
 LOCAL_APPS = [
     'apps.user',
+    'apps.authentication',
 ]
 
 THIRD_PARTY_APPS = [
