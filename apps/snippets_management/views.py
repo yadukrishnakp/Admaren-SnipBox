@@ -15,6 +15,7 @@ from snipbox_core.helpers.custom_messages import _success,_record_not_found
 
 # Create your views here.
 
+
 # Return All the snippets and its count with pagination
 class GetSnippetsCountAndDeatilsListApiView(generics.GenericAPIView):
     def __init__(self, **kwargs):
@@ -33,8 +34,7 @@ class GetSnippetsCountAndDeatilsListApiView(generics.GenericAPIView):
             page        = self.paginate_queryset(queryset)
             serializer  = self.serializer_class(page, many=True,context={'request':request})
             return self.get_paginated_response(serializer.data)
-
-
+        
         except Exception as e:
             exc_type, exc_obj, exc_tb = sys.exc_info()
             fname = os.path.split(exc_tb.tb_frame.f_code.co_filename)[1]
@@ -65,7 +65,6 @@ class CreateSnippetsApiView(generics.GenericAPIView):
                 return Response(self.response_format, status=status.HTTP_400_BAD_REQUEST)
             
             serializer.save()
-            
             self.response_format['status_code'] = status.HTTP_201_CREATED
             self.response_format["message"] = _success
             self.response_format["status"] = True
@@ -95,7 +94,6 @@ class UpdateSnippetsApiView(generics.GenericAPIView):
         try:
 
             snippet_instance = get_object_or_none(Snippet, pk=request.data.get('id'))
-            
             if snippet_instance is None:
                 self.response_format['status_code'] = status.HTTP_204_NO_CONTENT
                 self.response_format["message"] = _record_not_found
@@ -111,7 +109,6 @@ class UpdateSnippetsApiView(generics.GenericAPIView):
                 return Response(self.response_format, status=status.HTTP_400_BAD_REQUEST)
             
             snippet_instance = serializer.save()
-
             self.response_format['status_code'] = status.HTTP_201_CREATED
             self.response_format["message"] = _success
             self.response_format["data"] = self.response_schema_class(snippet_instance, context={'request': request}).data
@@ -125,7 +122,6 @@ class UpdateSnippetsApiView(generics.GenericAPIView):
             self.response_format['status'] = False
             self.response_format['message'] = str(e)
             return Response(self.response_format, status=status.HTTP_500_INTERNAL_SERVER_ERROR)
-  
 
 
 # Return the snippets, also check the current user, return snippets if the current both current user and created user are same
@@ -221,8 +217,7 @@ class GetTagListApiView(generics.GenericAPIView):
             page        = self.paginate_queryset(queryset)
             serializer  = self.serializer_class(page, many=True,context={'request':request})
             return self.get_paginated_response(serializer.data)
-
-
+        
         except Exception as e:
             exc_type, exc_obj, exc_tb = sys.exc_info()
             fname = os.path.split(exc_tb.tb_frame.f_code.co_filename)[1]

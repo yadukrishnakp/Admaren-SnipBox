@@ -33,16 +33,10 @@ class UserManager(BaseUserManager):
 
 class Users(AbstractBaseUser):
 
-        
-    # def __init__(self, *args, **kwargs):
-    #     super(Users, self).__init__(*args, **kwargs)
-    #     self.original_password = self.password
-        
     email                         = models.EmailField(_('email'), unique = True, max_length = 255, blank = True, null = True)
     full_name                     = models.CharField(_('name'), max_length=255, blank = True, null = True)
     username                      = models.CharField(_('username'), max_length = 300, unique = True, blank = True, null = True)
     password                      = models.CharField(_('password'), max_length=255, blank = True, null = True)
-    slug                          = models.SlugField(_('slug'),  max_length=255, unique=True, editable=False, blank = True, null = True)
     date_joined                   = models.DateTimeField(_('date_joined'),  auto_now_add = True, blank = True, null = True)
     is_admin                      = models.BooleanField(default = False)
     is_superuser                  = models.BooleanField(default = False)
@@ -59,15 +53,6 @@ class Users(AbstractBaseUser):
     
     def __str__(self):
         return "{username}".format(username=self.username)
-    
-    
-            
-            
-    # def _password_has_been_changed(self):
-    #     return self.original_password != self.password
-    
-
-
 
 
 class GeneratedAccessToken(models.Model):
