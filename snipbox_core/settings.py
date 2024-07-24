@@ -163,16 +163,14 @@ DB_CONN_MAX_AGE = int(os.environ.get("DB_CONN_MAX_AGE", 600))
 
 # https://docs.djangoproject.com/en/5.0/ref/settings/#databases
 DATABASES = {
-    "default": dj_database_url.config(
-        default=f"postgres://{os.environ.get('DATABASE_USER')}:{os.environ.get('DATABASE_PASSWORD')}@{os.environ.get('DATABASE_HOST')}:{os.environ.get('DATABASE_PORT')}/{os.environ.get('DATABASE_NAME')}", 
-        conn_max_age=600,
-        conn_health_checks=True,
-    ),
-    "replica": dj_database_url.config(
-        default=f"postgres://{os.environ.get('DATABASE_USER')}:{os.environ.get('DATABASE_PASSWORD')}@{os.environ.get('DATABASE_READER_HOST')}:{os.environ.get('DATABASE_PORT')}/{os.environ.get('DATABASE_NAME')}", 
-        conn_max_age=600,
-        conn_health_checks=True,
-    )
+    'default': {
+        'ENGINE': 'django.db.backends.postgresql_psycopg2',
+        'NAME': os.environ.get('DATABASE_NAME'),
+        'USER': os.environ.get('DATABASE_USER'),
+        'PASSWORD': os.environ.get('DATABASE_PASSWORD'),
+        'HOST': os.environ.get('DATABASE_HOST'),
+        'PORT': os.environ.get('DATABASE_PORT'),
+    },
 }
 
 

@@ -30,12 +30,10 @@ class CreateOrUpdateSnippetSerializer(serializers.ModelSerializer):
         instance.created_date   = timezone.now()
         instance.modified_date  = timezone.now()
         instance.save()
-
         tag_instance, created = Tag.objects.get_or_create(title=validated_data.get('tag'))
-        
         instance.tag = tag_instance
-
         instance.save()
+
         return instance
     
 
@@ -53,7 +51,6 @@ class UpdateSnippetserializer(serializers.Serializer):
     def validate(self, attrs):
         return super().validate(attrs)
 
-
     def update(self, instance, validated_data):
         request = self.context.get('request')
         user_instance = get_token_user_or_none(request)
@@ -64,9 +61,9 @@ class UpdateSnippetserializer(serializers.Serializer):
         instance.modified_date  = timezone.now()
 
         tag_instance, created = Tag.objects.get_or_create(title=validated_data.get('tag'))
-        
         instance.tag = tag_instance
         instance.save()
+        
         return instance
 
 

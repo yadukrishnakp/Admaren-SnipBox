@@ -1,15 +1,11 @@
 from django.db import models
-from apps.user.models import Users
 from snipbox_core.models import AbstractDateTimeFieldBaseModel
 from django.utils.translation import gettext_lazy as _
-from django.utils.text import slugify
-from random import randint
 # Create your models here.
     
 
 class Tag(models.Model):
     title         = models.CharField(_('Tag Title'), unique=True, max_length=255, blank=True, null=True)
-
 
     class Meta:
         verbose_name = 'Tag'
