@@ -39,7 +39,7 @@ class CreateOrUpdateSnippetSerializer(serializers.ModelSerializer):
         return instance
     
 
-
+# Collecting snippet details and update to database with unique tag name.
 class UpdateSnippetserializer(serializers.Serializer):
     id           = serializers.IntegerField(required=True,allow_null=True)
     title        = serializers.CharField(required=True)
@@ -67,5 +67,13 @@ class UpdateSnippetserializer(serializers.Serializer):
         
         instance.tag = tag_instance
         instance.save()
-        
         return instance
+
+
+# Capturing list of id for delete item from Snippets
+class DeleteSnippetSerializer(serializers.ModelSerializer): 
+    id= serializers.ListField(child=serializers.IntegerField(), required=True)
+   
+    class Meta: 
+        model   = Snippet
+        fields  = ['id']
