@@ -1,10 +1,8 @@
 from typing import Optional
-import os,dj_database_url,datetime,ast,warnings,django_cache_url
+import os,dj_database_url,datetime,ast,warnings
 from pathlib import Path
 from dotenv import load_dotenv, find_dotenv
-from django.core.exceptions import ImproperlyConfigured
 from django.core.management.utils import get_random_secret_key
-from datetime import timedelta
 from django.core.validators import URLValidator
 from typing import List, Optional
 
@@ -103,6 +101,7 @@ INSTALLED_APPS = [
 ]
 
 LOCAL_APPS = [
+    'apps.user',
 ]
 
 THIRD_PARTY_APPS = [
@@ -222,6 +221,7 @@ MEDIA_URL = '/media/'
 
 DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
 
+AUTH_USER_MODEL = "user.Users"
 
 
 SWAGGER_SETTINGS = {
@@ -292,8 +292,6 @@ SIMPLE_JWT = {
 REST_PAGINATED_PAGE_SIZE        = os.environ.get('REST_PAGINATED_PAGE_SIZE','')
 
 
-
-
 #Additional
 LOGGING = {
     'version': 1,
@@ -343,11 +341,6 @@ LOGGING = {
         
     }
 }
-
-
-
-
-
 
 
 

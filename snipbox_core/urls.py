@@ -44,6 +44,7 @@ urlpatterns = [
     path('', RedirectView.as_view(url='api/docs/',)),
 
     re_path(r'^api/',include([
+        path('user/', include('apps.user.urls')),
 
 
         re_path(r'^docs/', include([
